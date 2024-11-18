@@ -1,18 +1,14 @@
 #include <stdio.h>
 #include <math.h>
+int powerSum(int num, int digits) {
+    if (num == 0)
+        return 0;
+    int digit = num % 10;
+    return pow(digit, digits) + powerSum(num / 10, digits);
+}
 int isArmstrong(int num) {
-    int originalNum = num, sum = 0, digits = 0;
-    while (num != 0) {
-        digits++;
-        num /= 10;
-    }
-    num = originalNum;
-    while (num != 0) {
-        int digit = num % 10;
-        sum += pow(digit, digits);
-        num /= 10;
-    }
-    return sum == originalNum;
+    int digits = log10(num) + 1;
+    return num == powerSum(num, digits);
 }
 int main() {
     int num;
