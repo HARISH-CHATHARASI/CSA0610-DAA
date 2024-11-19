@@ -1,0 +1,54 @@
+#include <stdio.h>
+void multiplyMatrices(int A[][10], int B[][10], int result[][10], int r1, int c1, int r2, int c2) {
+    if (c1 != r2) {
+        printf("Error: Number of columns in first matrix must be equal to the number of rows in second matrix.\n");
+        return;
+    }
+    for (int i = 0; i < r1; i++) {
+        for (int j = 0; j < c2; j++) {
+            result[i][j] = 0;
+        }
+    }
+    for (int i = 0; i < r1; i++) {
+        for (int j = 0; j < c2; j++) {
+            for (int k = 0; k < c1; k++) {
+                result[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+}
+void printMatrix(int A[][10], int r, int c) {
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+            printf("%d ", A[i][j]);
+        }
+        printf("\n");
+    }
+}
+int main() {
+    int A[10][10], B[10][10], result[10][10], r1, c1, r2, c2;
+    printf("Enter rows and columns of first matrix: ");
+    scanf("%d %d", &r1, &c1);
+    printf("Enter rows and columns of second matrix: ");
+    scanf("%d %d", &r2, &c2);
+    if (c1 != r2) {
+        printf("Error: Number of columns in first matrix must be equal to the number of rows in second matrix.\n");
+        return 1;
+    }
+    printf("Enter elements of first matrix:\n");
+    for (int i = 0; i < r1; i++) {
+        for (int j = 0; j < c1; j++) {
+            scanf("%d", &A[i][j]);
+        }
+    }
+    printf("Enter elements of second matrix:\n");
+    for (int i = 0; i < r2; i++) {
+        for (int j = 0; j < c2; j++) {
+            scanf("%d", &B[i][j]);
+        }
+    }
+    multiplyMatrices(A, B, result, r1, c1, r2, c2);
+    printf("Product of the matrices:\n");
+    printMatrix(result, r1, c2);
+    return 0;
+}
